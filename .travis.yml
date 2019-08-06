@@ -25,5 +25,3 @@ before_script:
   
 script:
   - cypress run --record --key 04e92912-99d3-4734-a84d-ae0aae404ed0
-  - node_modules/.bin/newman run tests/Trivago.postman_collection.json -e tests/Trivago.Variables.postman_environment.json -r cli,json,html
-
