@@ -15,5 +15,15 @@ cache:
     - ~/.cache
 install:
   - npm ci
+  - npm install newman
+  - npm install -g newman-reporter-html
+  
+before_script:
+  - node --version
+  - npm --version
+  - node_modules/.bin/newman --version
+  
 script:
-  - $(npm bin)/cypress run --record
+  - cypress run --record --key 04e92912-99d3-4734-a84d-ae0aae404ed0
+  - node_modules/.bin/newman run tests/Trivago.postman_collection.json -e tests/Trivago.Variables.postman_environment.json -r cli,json,html
+
