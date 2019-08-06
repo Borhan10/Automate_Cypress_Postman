@@ -16,4 +16,4 @@ cache:
 install:
   - npm ci
 script:
-  - npm cypress run --record
+  - npx cypress run
