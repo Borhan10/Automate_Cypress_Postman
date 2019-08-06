@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "c6af4fe9-ba1a-4876-95d6-bcb8f4d6b108",
+		"name": "Trivago",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PublicSeries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c7f9ae11-490d-4943-b4a2-d9589f7b6829",
+						"exec": [
+							"var responseData=pm.response.json();",
+							"",
+							"",
+							"if(responseCode.code==409 ){ ",
+							"    pm.test(\"Test error message for Status code is 409\tand Missing API Key\t\", function () {",
+							"    pm.expect(responseData.message).to.equal(\"Missing API Key\");",
+							"    });",
+							"}",
+							"",
+							"if(responseCode.code==409){",
+							"    pm.test(\"Test error message for Status code is 409\tand Missing Hash\", function () {",
+							"    pm.expect(responseData.message).to.equal(\"Missing Hash\");",
+							"    });",
+							"}",
+							"",
+							"if(responseCode.code==409){",
+							"    pm.test(\"Test error message for Status code is 409\tand Missing Timestamp\", function () {",
+							"    pm.expect(responseData.message).to.equal(\"Missing Timestamp\");",
+							"    });",
+							"}",
+							"",
+							"if(responseCode.code==401){",
+							"    pm.test(\"Test error message for Status code is 401 and not valid apikey\", function () {",
+							"    pm.expect(responseData.message).to.equal(\"Invalid Referer\");",
+							"    });",
+							"",
+							"}",
+							"if(responseCode.code==401){",
+							"    pm.test(\"Test error message for Status code is 401 and not valid hash\", function () {",
+							"    pm.expect(responseData.message).to.equal(\"Invalid Hash\");",
+							"    });",
+							"",
+							"}",
+							"",
+							"if(responseCode.code==405){",
+							"    pm.test(\"Test error message for Status code is 405\", function () {",
+							"    pm.expect(responseData.message).to.equal(\"Method Not Allowed\");",
+							"    });",
+							"",
+							"}",
+							"",
+							"if(responseCode.code==403){",
+							"    pm.test(\"Test error message for Status code is 403\", function () {",
+							"    pm.expect(responseData.message).to.equal(\"Forbidden\");",
+							"    });",
+							"",
+							"}",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://gateway.marvel.com/v1/public/series?ts={{time}}&apikey={{apikey}}&hash={{hash}}",
+					"protocol": "http",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"series"
+					],
+					"query": [
+						{
+							"key": "ts",
+							"value": "{{time}}"
+						},
+						{
+							"key": "apikey",
+							"value": "{{apikey}}"
+						},
+						{
+							"key": "hash",
+							"value": "{{hash}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PublicComics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57380b40-01f2-4ddc-90b0-d7e3979c7e02",
+						"exec": [
+							"var responseData=pm.response.json();",
+							"var arr=false;",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"if(responseCode.code==200){",
+							"    pm.test(\"results is array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results));",
+							"    });",
+							"    pm.test(\"results are more than 0\", function () {",
+							"                    pm.expect(true).to.equal(arrLength(responseData.data.results));",
+							"    });",
+							"    ",
+							"    pm.test(\"id is integer\", function () {",
+							"                    pm.expect(true).to.equal(isInteger(responseData.data.results[0].id));",
+							"    });",
+							"    ",
+							"    pm.test(\"digitalId is integer\", function () {",
+							"                    pm.expect(true).to.equal(isInteger(responseData.data.results[0].digitalId));",
+							"    });",
+							"    pm.test(\"issueNumber is integer\", function () {",
+							"                    pm.expect(true).to.equal(isInteger(responseData.data.results[0].issueNumber));",
+							"    });",
+							"    ",
+							"    pm.test(\"pageCount is integer\", function () {",
+							"                    pm.expect(true).to.equal(isInteger(responseData.data.results[0].pageCount));",
+							"    });",
+							"    ",
+							"    pm.test(\"title is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].title));",
+							"    });",
+							"    ",
+							"     pm.test(\"variantDescription is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].variantDescription));",
+							"    });",
+							"    ",
+							"     pm.test(\"description is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].description));",
+							"    });",
+							"    ",
+							"    pm.test(\"modified is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].modified));",
+							"    });",
+							"    ",
+							"    pm.test(\"isbn is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].isbn));",
+							"    });",
+							"    ",
+							"    pm.test(\"upc is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].upc));",
+							"    });",
+							"    pm.test(\"diamondCode is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].diamondCode));",
+							"    });",
+							"    pm.test(\"ean is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].ean));",
+							"    });",
+							"    pm.test(\"issn is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].issn));",
+							"    });",
+							"    pm.test(\"format is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].format));",
+							"    });",
+							"    pm.test(\"resourceURI is String\", function () {",
+							"                    pm.expect(true).to.equal(isString(responseData.data.results[0].resourceURI));",
+							"    });",
+							"     ",
+							"    ",
+							"    pm.test(\"textObjects is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].textObjects));",
+							"        });",
+							"    pm.test(\"textObjects has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].textObjects));",
+							"        });",
+							"        ",
+							"        ",
+							"    pm.test(\"urls is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].urls));",
+							"        });",
+							"    pm.test(\"urls has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].urls));",
+							"        });",
+							"        ",
+							"    pm.test(\"variants is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].variants));",
+							"        });",
+							"    pm.test(\"variants has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].variants));",
+							"        });    ",
+							"        ",
+							"",
+							"    pm.test(\"collections  is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].collections));",
+							"        });",
+							"    pm.test(\"collections has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].collections));",
+							"        });    ",
+							"    pm.test(\"collectedIssues  is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].collectedIssues));",
+							"        });",
+							"    pm.test(\"collectedIssues has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].collectedIssues));",
+							"        });    ",
+							"    pm.test(\"dates is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].dates));",
+							"        });",
+							"    pm.test(\"dates has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].dates));",
+							"        });    ",
+							"        ",
+							"    pm.test(\"prices is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].prices));",
+							"        });",
+							"    pm.test(\"prices has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].prices));",
+							"        });     ",
+							"        ",
+							"    pm.test(\"images is an array\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].images));",
+							"        });",
+							"    pm.test(\"images has values\", function () {",
+							"                    pm.expect(true).to.equal(isArr(responseData.data.results[0].images));",
+							"        });    ",
+							"    ",
+							"",
+							"}",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"function isArr(obj){",
+							"   return Array.isArray(obj);",
+							"",
+							"}",
+							"",
+							"function isInteger(obj){",
+							"    return Number.isInteger(obj);",
+							"}",
+							"",
+							"",
+							"function isString(obj){",
+							"    if(typeof(obj)==='string')",
+							"      return true;",
+							"    else",
+							"      return false;",
+							"}",
+							"",
+							"function isDate(obj){",
+							"    return obj instanceof Date;",
+							"}",
+							"",
+							"function arrLength(obj){",
+							"    if(obj.length>0){",
+							"        return true;",
+							"    }",
+							"    else{",
+							"        return false;",
+							"    }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://gateway.marvel.com/v1/public/comics/{{comicID}}?ts={{time}}&apikey={{apikey}}&hash={{hash}}",
+					"protocol": "http",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"comics",
+						"{{comicID}}"
+					],
+					"query": [
+						{
+							"key": "ts",
+							"value": "{{time}}"
+						},
+						{
+							"key": "apikey",
+							"value": "{{apikey}}"
+						},
+						{
+							"key": "hash",
+							"value": "{{hash}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Characters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc73dd4f-4745-484e-bd7a-1c05b555563d",
+						"exec": [
+							"var responseData=pm.response.json();",
+							"",
+							" pm.test(\"Verify character name\", function () {",
+							"          pm.expect(\"Spider-Man (Ultimate)\").to.equal(responseData.data.results[0].name);",
+							"    });",
+							" ",
+							" pm.test(\"Verify Modification date\", function () {",
+							"          pm.expect(true).to.equal(dateValidation(responseData.data.results[0].modified));",
+							"    });",
+							" ",
+							" ",
+							"pm.sendRequest(responseData.data.results[0].thumbnail.path+\".\"+responseData.data.results[0].thumbnail.extension, function (err, responseImage) {",
+							"    ",
+							"      pm.test(\"Verify Image \", function () {",
+							"          pm.expect(true).to.equal(responseImage.responseSize>0);",
+							"    });",
+							"          pm.test(\"Verify image url\", function () {",
+							"          pm.expect(true).to.equal(responseImage.code==200);",
+							"    });",
+							"    ",
+							"    ",
+							"});",
+							"",
+							"",
+							"",
+							"function dateValidation(obj){",
+							"    var objAfter=obj.split(\"-\");",
+							"    if(objAfter[0]>=2014){",
+							"        if(objAfter[1]>01)",
+							"        return true;",
+							"        ",
+							"        else return false;",
+							"        ",
+							"    }",
+							"     else return false;",
+							"    ",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://gateway.marvel.com/v1/public/characters/{{validCharacterID}}?ts={{time}}&apikey={{apikey}}&hash={{hash}}",
+					"protocol": "http",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"characters",
+						"{{validCharacterID}}"
+					],
+					"query": [
+						{
+							"key": "ts",
+							"value": "{{time}}"
+						},
+						{
+							"key": "apikey",
+							"value": "{{apikey}}"
+						},
+						{
+							"key": "hash",
+							"value": "{{hash}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Failling EndPoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2652c1ae-c574-4483-a3e3-81e50a8d7d2c",
+						"exec": [
+							"var responseData=pm.response.json();",
+							"",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"",
+							" pm.test(\"Verify code is 404\", function () {",
+							"          pm.expect(404).to.equal(responseData.code);",
+							"    });",
+							" ",
+							" ",
+							" ",
+							" pm.test(\"Verify character not found \", function () {",
+							"          pm.expect(\"We couldn't find that character\").to.equal(responseData.status);",
+							"    });",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://gateway.marvel.com/v1/public/characters/{{invalidCharacterID}}?ts={{time}}&apikey={{apikey}}&hash={{hash}}",
+					"protocol": "http",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"characters",
+						"{{invalidCharacterID}}"
+					],
+					"query": [
+						{
+							"key": "ts",
+							"value": "{{time}}"
+						},
+						{
+							"key": "apikey",
+							"value": "{{apikey}}"
+						},
+						{
+							"key": "hash",
+							"value": "{{hash}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
