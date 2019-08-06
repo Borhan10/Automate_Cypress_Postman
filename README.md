@@ -147,9 +147,11 @@ You will need Newman installed in your local machine if you will run the collect
 
 * [Travis CI](https://Travis-ci.org) - Responsible for CI 
 
+* The CI couldn't be run after make the repo private 
 
 ### Access on Repository 
 
 * The repository is private if access needed please contact me throw borhan_m7amed@live.com
 
 * Both of the projects are running with one build using the .yml file commands 
+
