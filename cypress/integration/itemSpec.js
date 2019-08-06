@@ -9,7 +9,7 @@ describe('itemSpec', () => {
         cy.selectSize()
       });
 
-  it('Should check for the item price', () => {
+  it('Check for the item price', () => {    // Check the price of the item and save it for next check in cart 
         cy.get('[data-codecept="productPrice"]')
         .find('.js-fprice')
         .invoke('text')
@@ -22,8 +22,7 @@ describe('itemSpec', () => {
             
     });
 
-    it('Should get for the item title', () => {
-   
+    it('Check Get for the item title', () => {     // Check the title of the item and save it for next check in cart
         cy.get('span[class="product-title"]')
         .invoke('text')
         .then(text => {
@@ -36,7 +35,7 @@ describe('itemSpec', () => {
 
 
 
-    it('Should check for the item weight', () => {
+    it('Check for the item weight', () => {    // Check that weight displayed 
         cy.get('dl[class="attributes"')
         .find('dt')
         .should(($weight)=>{
@@ -47,7 +46,7 @@ describe('itemSpec', () => {
 
 
 
-    it('Should check for the item return policy ', () => {
+    it('Check for the item return policy ', () => {   // Check return policy displayed
         cy.get('ul[class="details-advantages-snippet"').contains('30 days returns policy')
         .should(($reurnPolicy)=>{
             expect($reurnPolicy).to.contain('30 days returns policy')
@@ -57,7 +56,7 @@ describe('itemSpec', () => {
 
 
 
-    it('Should check for at least 1 user review available', () => {
+    it('Check for at least 1 user review available', () => {   // Check that number of users review is more than 0
         cy.get('span[itemprop="reviewCount"]')
         .invoke('text')
         .then(text=>{

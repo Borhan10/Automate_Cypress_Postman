@@ -13,7 +13,7 @@ describe('cartSpec', () => {
         cy.goToCheckout()
       });
      
-    it('Should check that login form appear', () => {
+    it('Check that login form appear', () => {         // check that all items in login form appear 
         cy.get('button[data-codecept="customerLoginButton"]')
         .invoke('text')
         .then(bottonName=>{
@@ -35,7 +35,7 @@ describe('cartSpec', () => {
     })
 
          
-    it('Should check that Create account button appear', () => {
+    it('Check that Create account button appear', () => {    // Check that create account button appear 
         cy.get('button[title="Create an account"]')
         .invoke('text')
         .then(bottonName=>{

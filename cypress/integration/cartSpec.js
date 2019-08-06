@@ -1,6 +1,6 @@
 describe('cartSpec', () => {
     beforeEach(() => {
-        cy.pressSearchButton()
+        cy.pressSearchButton()  
         cy.enterSearchValue()
         cy.pressEnter()
         cy.wait(5000);
@@ -11,9 +11,9 @@ describe('cartSpec', () => {
         cy.addToCart()
         cy.goToCart()
       });
-     /*
-    it('Should check for the item price in cart', () => {
-        cy.fixture('price.json').then((productDetailPrice) => {
+    
+    it('Check for the item price in cart', () => {   
+        cy.fixture('price.json').then((productDetailPrice) => {     // get the old price from the details item page 
         cy.get('span[class="totalprice padding-left right font-red"]')
         .invoke('text')
         .then(cartPrice=>{
@@ -22,8 +22,8 @@ describe('cartSpec', () => {
         })
     })
 
-    it('Should check for the item title in cart', () => {
-        cy.fixture('productTitle.json').then((productDetailTitle) => {
+    it('Check for the item title in cart', () => {
+        cy.fixture('productTitle.json').then((productDetailTitle) => {   // get the old title from product details  
         cy.get('span[class="product--title"]')
         .invoke('text')
         .then(cartTitle=>{
@@ -33,7 +33,7 @@ describe('cartSpec', () => {
     })
 
 
-    it('Should check that voucher code is not available', () => {
+    it('Check that voucher code is not available', () => {     // try to check that code doesn't work with invalid code
         cy.get('input[class="vouchercode"]').type("voucher1234")
         cy.get('button[class="a-button a-button--gray right"]').click()
         cy.get('p[class="error font-red"]')
@@ -42,7 +42,7 @@ describe('cartSpec', () => {
             expect(errorMessage).to.equal('Reason: This voucher is not valid!')
         })
     })
-*/
+
 
 
 })
